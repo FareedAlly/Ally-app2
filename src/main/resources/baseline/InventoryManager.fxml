@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="baseline.InventoryManagerController">
+   <children>
+      <Label alignment="CENTER" prefHeight="27.0" prefWidth="747.0" text="Add An Item">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <HBox prefHeight="0.0" prefWidth="600.0">
+         <children>
+            <TextField fx:id="addedItemName" alignment="CENTER" promptText="Enter the item's name" />
+            <TextField fx:id="addedItemValue" alignment="CENTER" promptText="Enter the item's value">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </TextField>
+            <TextField fx:id="addedItemSerialNumber" alignment="CENTER" prefHeight="25.0" prefWidth="182.0" promptText="Enter the item's serial number">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="addItemButton" mnemonicParsing="false" onAction="#addItemButtonClicked" text="Add Item">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <TableView fx:id="tableView" editable="true" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="nameColumn" minWidth="275.0" prefWidth="75.0" text="Item Name" />
+          <TableColumn fx:id="valueColumn" minWidth="50.0" prefWidth="88.0" text="Item Value" />
+            <TableColumn fx:id="serialNumberColumn" minWidth="275.0" prefWidth="56.0" text="Item Serial Number" />
+        </columns>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </TableView>
+      <Label fx:id="statusField" alignment="CENTER" prefHeight="17.0" prefWidth="841.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+      <HBox prefHeight="0.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="removeItemButton" mnemonicParsing="false" onAction="#removeItemButtonClicked" text="Remove Item">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="removeAllItemsButton" mnemonicParsing="false" onAction="#removeAllItemsButtonClicked" text="Remove All Items">
+               <HBox.margin>
+                  <Insets left="35.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="editItemButton" mnemonicParsing="false" onAction="#editItemButtonClicked" text="Edit Item">
+               <HBox.margin>
+                  <Insets left="35.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="saveInventoryButton" mnemonicParsing="false" onAction="#saveInventoryButtonClicked" text="Save Inventory">
+               <HBox.margin>
+                  <Insets left="35.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="loadInventoryButton" mnemonicParsing="false" onAction="#loadInventoryButtonClicked" text="Load Inventory">
+               <HBox.margin>
+                  <Insets left="35.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox prefHeight="0.0" prefWidth="600.0">
+         <children>
+            <TextField fx:id="nameLookup" prefHeight="25.0" prefWidth="292.0" promptText="Enter the name of the item you would like to search">
+               <HBox.margin>
+                  <Insets left="100.0" />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="searchItemNameButton" mnemonicParsing="false" onAction="#searchItemNameButtonClicked" text="Search Name">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox prefHeight="2.0" prefWidth="600.0">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+         <children>
+            <TextField fx:id="serialNumberLookup" prefHeight="25.0" prefWidth="334.0" promptText="Enter the serial number of the item you would like to search">
+               <HBox.margin>
+                  <Insets left="70.0" />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="searchItemSerialNumberButton" mnemonicParsing="false" onAction="#searchItemSerialNumberButtonClicked" text="Search Serial Number">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>
