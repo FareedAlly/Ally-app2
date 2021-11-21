@@ -67,11 +67,6 @@
                   <Insets left="35.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="editItemButton" mnemonicParsing="false" onAction="#editItemButtonClicked" text="Edit Item">
-               <HBox.margin>
-                  <Insets left="35.0" />
-               </HBox.margin>
-            </Button>
             <Button fx:id="saveInventoryButton" mnemonicParsing="false" onAction="#saveInventoryButtonClicked" text="Save Inventory">
                <HBox.margin>
                   <Insets left="35.0" />
