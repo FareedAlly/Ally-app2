@@ -13,7 +13,7 @@ public class InventoryManagementApplication extends javafx.application.Applicati
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("InventoryManager.fxml"));
 
-        primaryStage.setTitle("To-do list");
+        primaryStage.setTitle("Inventory Manager");
         primaryStage.setScene(new Scene(root, 600, 500));
 
         primaryStage.show();
