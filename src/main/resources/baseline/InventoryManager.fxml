@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="baseline.InventoryManagerController">
+<VBox fx:id="Items" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="baseline.InventoryManagerController">
    <children>
       <Label alignment="CENTER" prefHeight="27.0" prefWidth="747.0" text="Add An Item">
          <font>
@@ -49,7 +49,7 @@
       </TableView>
       <Label fx:id="statusField" alignment="CENTER" prefHeight="17.0" prefWidth="841.0">
          <font>
-            <Font size="18.0" />
+            <Font size="36.0" />
          </font>
          <VBox.margin>
             <Insets top="10.0" />
@@ -84,37 +84,25 @@
       </HBox>
       <HBox prefHeight="0.0" prefWidth="600.0">
          <children>
-            <TextField fx:id="nameLookup" prefHeight="25.0" prefWidth="292.0" promptText="Enter the name of the item you would like to search">
+            <TextField fx:id="nameLookup" prefHeight="25.0" prefWidth="377.0" promptText="Enter the name or serial number of the item you would like to search">
                <HBox.margin>
-                  <Insets left="100.0" />
+                  <Insets left="75.0" />
                </HBox.margin>
             </TextField>
-            <Button fx:id="searchItemNameButton" mnemonicParsing="false" onAction="#searchItemNameButtonClicked" text="Search Name">
+            <Button fx:id="searchItemNameButton" mnemonicParsing="false" onAction="#searchItemNameButtonClicked" text="Search">
                <HBox.margin>
-                  <Insets left="10.0" />
+                  <Insets left="30.0" />
                </HBox.margin>
             </Button>
          </children>
          <VBox.margin>
-            <Insets top="10.0" />
+            <Insets top="30.0" />
          </VBox.margin>
       </HBox>
       <HBox prefHeight="2.0" prefWidth="600.0">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>
-         <children>
-            <TextField fx:id="serialNumberLookup" prefHeight="25.0" prefWidth="334.0" promptText="Enter the serial number of the item you would like to search">
-               <HBox.margin>
-                  <Insets left="70.0" />
-               </HBox.margin>
-            </TextField>
-            <Button fx:id="searchItemSerialNumberButton" mnemonicParsing="false" onAction="#searchItemSerialNumberButtonClicked" text="Search Serial Number">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </Button>
-         </children>
       </HBox>
    </children>
 </VBox>

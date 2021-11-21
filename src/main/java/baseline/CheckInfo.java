@@ -9,10 +9,11 @@ public class CheckInfo
         return name.length() >= 2 && name.length() <= 256;
     }
 
-    public boolean checkValue(float value)
+    public boolean checkValue(String value)
     {
+        float cost = Float.parseFloat(value);
         // Check if value is greater than or equal to 0
-        return value >= 0;
+        return cost >= 0;
     }
 
     public boolean checkSerialNumber(String serialNumber)
@@ -40,7 +41,7 @@ public class CheckInfo
         }
 
         // Check to see if special characters are present
-        return false;
+        return true;
     }
 
 }

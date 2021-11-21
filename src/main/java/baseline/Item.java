@@ -6,7 +6,7 @@ import java.util.List;
 public class Item
 {
     private String name;
-    private float value;
+    private String value;
     private String serialNumber;
 
     // Create check object to validate info
@@ -16,7 +16,7 @@ public class Item
     private static final List<Item> inventory = new ArrayList<>();
 
     // Constructor
-    public Item(String name, float value, String serialNumber)
+    public Item(String name, String value, String serialNumber)
     {
         this.name = name;
         this.value = value;
@@ -42,7 +42,7 @@ public class Item
         }
     }
 
-    public void setValue(float value)
+    public void setValue(String value)
     {
         // Check value then assign it
         if(check.checkValue(value))
@@ -70,7 +70,7 @@ public class Item
         return serialNumber;
     }
 
-    public float getValue()
+    public String getValue()
     {
         return value;
     }
