@@ -28,9 +28,9 @@ import java.util.regex.Pattern;
 
 public class InventoryManagerController
 {
-    private int index = 0;
+    public int index = 0;
     CheckInfo check = new CheckInfo();
-    private final ObservableList<Item> list = FXCollections.observableArrayList();
+    public final ObservableList<Item> list = FXCollections.observableArrayList();
 
     @FXML private Button addItemButton;
     @FXML private TextField addedItemName;

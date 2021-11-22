@@ -36,7 +36,11 @@ class InventoryManagementController
 +void saveInventoryButtonClicked(ActionEvent event)
 +void searchItemNameButtonClicked(ActionEvent event)
 +public void searchList()
-
 }
+
+InventoryManagementApplication -->InventoryManagementController
+Item --> InventoryManagementController
+InventoryManagementController --> CheckInfo
+
 
 @enduml
