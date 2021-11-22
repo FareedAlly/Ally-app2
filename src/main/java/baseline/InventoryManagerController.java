@@ -1,5 +1,9 @@
 package baseline;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -13,9 +17,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
+import java.io.*;
 import java.util.Locale;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class InventoryManagerController
 {
@@ -195,9 +204,112 @@ public class InventoryManagerController
     @FXML
     void loadInventoryButtonClicked(ActionEvent event)
     {
-        // Use filechooser to create file object
-        // Create new file
-        // Send all the items to the list
+        String name;
+        String serialNumber;
+        String value;
+        // Use filechooser
+        FileChooser fileChooser = new FileChooser();
+        Stage load = new Stage();
+
+        fileChooser.setTitle("Load Inventory ");
+
+        File file = fileChooser.showOpenDialog(load);
+
+        // Clear current inventory
+        list.clear();
+
+        // Clear entire list of items
+        Item.getInventory().clear();
+
+        // Clear table view
+        tableView.getItems().clear();
+
+        // Reset index to 0
+        index = 0;
+
+
+        try
+        {
+            Scanner in = new Scanner(file);
+
+            //Load from the 3 different file types
+            if(file.getName().contains(".txt"))
+            {
+                in.nextLine();
+
+                while(in.hasNext())
+                {
+                    // Copy the information over
+                    serialNumber = in.next();
+                    name = in.next();
+                    value = in.next();
+
+                    //Create item
+                    addItemAndDisplay(name, value, serialNumber);
+                }
+            }
+            else if(file.getName().contains(".json"))
+            {
+                JsonParser jsonParser = new JsonParser();
+
+                FileReader fileReader = new FileReader(file);
+
+                Object object = jsonParser.parse(fileReader);
+
+                JsonObject jsonObject = (JsonObject) object;
+
+                name = jsonObject.get("name").toString();
+                value = jsonObject.get("value").toString();
+                serialNumber = jsonObject.get("serialNumber").toString();
+
+                addItemAndDisplay(name, value, serialNumber);
+
+
+            }
+            else if(file.getName().contains(".html"))
+            {
+                // The top of the html tile is not needed
+                in.skip(Pattern.compile("""
+                    <html>
+                    <head>
+                    <title>Inventory</title>
+                    </head>
+                    <body>
+                    <table> 
+                    <tr>
+                    """));
+
+
+
+                while(in.hasNextLine())
+                {
+
+                    serialNumber = in.nextLine();
+                    name = in.nextLine();
+                    value = in.nextLine();
+
+                    // Remove html tags such as <td> and </td>
+                    serialNumber = serialNumber.substring(4, serialNumber.length()-5);
+                    name = name.substring(4, name.length()-5);
+                    value = value.substring(4, value.length()-5);
+
+
+                    addItemAndDisplay(name, value, serialNumber);
+
+                    if(in.nextLine().contains("</table>"))
+                    {
+                        break;
+                    }
+
+                }
+
+            }
+
+        } catch (FileNotFoundException exception)
+          {
+            exception.printStackTrace();
+          }
+
 
     }
 
@@ -234,9 +346,94 @@ public class InventoryManagerController
     @FXML
     void saveInventoryButtonClicked(ActionEvent event)
     {
-        // Use filechooser object and ask user where they want to save their file
-        // Pass all info of current list into file
-        // For each item in inventory, copy information into file
+        // Use filechooser
+        FileChooser fileChooser = new FileChooser();
+
+        Stage save = new Stage();
+
+        String [] filetypes = {".txt", ".json", ".html"};
+
+        // Allow user to have 3 options for which the file will be saved as
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Save as ", filetypes);
+
+        fileChooser.setTitle("Save current inventory ");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+
+        File file = fileChooser.showSaveDialog(save);
+
+        //If user saves as txt file then let it be tsv
+        if(file.getName().contains(filetypes[0]))
+        {
+            // Use filewriter
+            try(FileWriter fileWriter = new FileWriter(file))
+            {
+                // Print titles for column
+                fileWriter.write("Serial Number\tName\tValue\n");
+
+                //Iterate through all items and write data to file
+                for(Item items : list)
+                {
+                    //Print info with tab seperation
+                    fileWriter.write(items.getSerialNumber() + "\t" + items.getName() + "\t" + items.getValue() + "\n");
+                }
+
+            } catch (IOException ioException)
+              {
+                ioException.printStackTrace();
+              }
+
+        }
+        if(file.getName().contains(filetypes[1]))
+        {
+            Gson gson = new Gson();
+
+            // Use filewriter
+            try(FileWriter fileWriter = new FileWriter(file))
+            {
+                gson.toJson(list, fileWriter);
+            } catch (IOException ioException)
+              {
+                ioException.printStackTrace();
+              }
+        }
+        if(file.getName().contains(filetypes[2]))
+        {
+            // Print the static text at the top and bottom of every html file
+            String topText = """
+                    <html>
+                    <head>
+                    <title>Inventory</title>
+                    </head>
+                    <body>
+                    <table>   
+                    """;
+
+            String bottomText = """
+                    </table>
+                    </body>
+                    </html>
+                    """;
+
+            // Use filewriter
+            try(FileWriter fileWriter = new FileWriter(file))
+            {
+                fileWriter.write(topText);
+
+                // Iterate through items and write all their info
+                for(Item items : list)
+                {
+                    fileWriter.write("<tr>\n<td>" + items.getSerialNumber() + "</td>\n<td>" + items.getName() + "</td>\n<td>" +  items.getValue() +"</td>\n</tr>");
+
+                }
+
+                fileWriter.write(bottomText);
+            } catch (IOException ioException)
+              {
+                ioException.printStackTrace();
+              }
+        }
+
+
 
     }
 

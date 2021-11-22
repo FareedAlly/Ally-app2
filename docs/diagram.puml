@@ -1,0 +1,42 @@
+@startuml
+
+class InventoryManagementApplication
+{
++public void start(Stage primaryStage)
++public static void main(String[] args)
+}
+
+class Item
+{
++public Item(String name, String value, String serialNumber)
++public void setName(String name)
++public void setValue(String value)
++public void setSerialNumber(String serialNumber)
+}
+
+class CheckInfo
+{
++public boolean checkName(String name)
++public boolean checkValue(String value)
++public boolean checkSerialNumber(String serialNumber)
+}
+
+class InventoryManagementController
+{
++void initialize()
++public void addItemToInventory(String name, String value, String serialNumber)
++public void clear()
++public void display()
++public void addItemAndDisplay(String name, String value, String serialNumber)
++public void createItem()
++void addItemButtonClicked(ActionEvent event)
++void loadInventoryButtonClicked(ActionEvent event)
++void removeAllItemsButtonClicked(ActionEvent event)
++void removeItemButtonClicked(ActionEvent event)
++void saveInventoryButtonClicked(ActionEvent event)
++void searchItemNameButtonClicked(ActionEvent event)
++public void searchList()
+
+}
+
+@enduml
