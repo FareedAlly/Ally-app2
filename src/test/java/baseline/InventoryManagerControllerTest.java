@@ -1,3 +1,8 @@
+/*
+ *  UCF COP3330 Fall 2021 Application Assignment 2 Solution
+ *  Copyright 2021 Fareed Ally
+ */
+
 package baseline;
 
 import org.junit.jupiter.api.Test;
@@ -71,6 +76,36 @@ class InventoryManagerControllerTest
         test.list.add(new Item("ccc", "3", "c-123-456-789"));
 
         assertEquals("1", test.list.get(0).getValue());
+    }
+
+    @Test
+    void clearListTest()
+    {
+        InventoryManagerController test = new InventoryManagerController();
+
+        test.list.add(new Item("aaa", "1", "a-123-456-789"));
+        test.list.add(new Item("bbb", "2", "b-123-456-789"));
+        test.list.add(new Item("ccc", "3", "c-123-456-789"));
+
+        test.list.clear();
+
+        assertEquals(0, test.list.size());
+
+    }
+
+    @Test
+    void removeOneItemTest()
+    {
+        InventoryManagerController test = new InventoryManagerController();
+
+        test.list.add(new Item("aaa", "1", "a-123-456-789"));
+        test.list.add(new Item("bbb", "2", "b-123-456-789"));
+        test.list.add(new Item("ccc", "3", "c-123-456-789"));
+
+        test.list.remove(2);
+
+        assertEquals(2, test.list.size());
+
     }
 
 
