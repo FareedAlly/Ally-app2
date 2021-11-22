@@ -67,7 +67,7 @@ public class InventoryManagerController
 
             else
             {
-                statusField.setText("Task not updated. ");
+                statusField.setText("Name not updated. ");
                 tableView.refresh();
             }
         });
@@ -82,7 +82,7 @@ public class InventoryManagerController
                 Item item = event.getRowValue();
                 item.setValue(event.getNewValue());
 
-                statusField.setText("Completion Date updated. ");
+                statusField.setText("Value updated. ");
             }
 
             else
@@ -96,10 +96,20 @@ public class InventoryManagerController
 
         serialNumberColumn.setOnEditCommit(event ->
         {
-            Item item = event.getRowValue();
-            item.setSerialNumber(event.getNewValue());
+            // If description is valid, then add it to the table
+            if(check.checkSerialNumber(event.getNewValue()))
+            {
+                Item item = event.getRowValue();
+                item.setSerialNumber(event.getNewValue());
 
-            tableView.refresh();
+                statusField.setText("Serial Number updated. ");
+            }
+
+            else
+            {
+                statusField.setText("Serial Number not updated. ");
+                tableView.refresh();
+            }
         });
     }
 

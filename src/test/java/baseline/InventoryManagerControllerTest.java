@@ -61,5 +61,19 @@ class InventoryManagerControllerTest
         assertEquals("a-123-456-789", test.list.get(0).getSerialNumber());
     }
 
+    @Test
+    void sortValueTest()
+    {
+        InventoryManagerController test = new InventoryManagerController();
+
+        test.list.add(new Item("aaa", "1", "a-123-456-789"));
+        test.list.add(new Item("bbb", "2", "b-123-456-789"));
+        test.list.add(new Item("ccc", "3", "c-123-456-789"));
+
+        assertEquals("1", test.list.get(0).getValue());
+    }
+
+
+
 
 }
